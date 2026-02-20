@@ -1,0 +1,67 @@
+import java.util.ArrayList;
+
+public class course {
+    private String courseName;
+    private ArrayList<Integer> courseGrades;
+
+
+    // Constructor
+    public course (String courseName, ArrayList<Integer> courseGrades) {
+        this.courseName = courseName;
+        this.courseGrades = new ArrayList<>(courseGrades);
+    }
+
+    // getter and setters
+    public String getCourseName() {
+        return courseName;
+    }
+
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
+    }
+
+    public ArrayList<Integer> getCourseGrades() {
+        return courseGrades;
+    }
+
+    public void setCourseGrades(ArrayList<Integer> courseGrades) {
+        this.courseGrades = new ArrayList<>(courseGrades);
+    }
+
+    // Total number of grades
+    public int getTotalGrades() {
+        int total = 0;
+        for (int grade : courseGrades) {
+            total += grade;
+        }
+        return total;
+    }
+
+    // A% calculation
+    public double getApercetn()  {
+        int total = getTotalGrades();
+        if (total == 0) return 0.0;
+        return (double) courseGrades.get(0) / total *100.0;
+    }
+
+    // toString method for printing
+    @Override
+    public String toString() {
+        return String.format("%-10s %5d %5d %5d %5d %5d %7d %7.2f",
+                courseName,
+                courseGrades.get(0),
+                courseGrades.get(1),
+                courseGrades.get(2),
+                courseGrades.get(3),
+                courseGrades.get(4),
+                getTotalGrades(),
+                getApercetn());
+    }
+
+    // method to add grades (used if a duplicate course exist in CSV)
+    public void addGrades(ArrayList<Integer> otherGrades) {
+        for (int i = 0; i < courseGrades.size(); i++) {
+            courseGrades.set(i, courseGrades.get(i) + otherGrades.get(i));
+        }
+    }
+}
